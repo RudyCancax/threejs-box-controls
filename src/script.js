@@ -20,17 +20,19 @@ const debugObject = {
 /**
  * TEXTUREs
  */
-// const image = new Image();
-// const imageTexture = new THREE.Texture(image);
-// imageTexture.colorSpace = THREE.SRGBColorSpace;
-// image.onload = () => {
-    //     console.log('image loaded');
-    //     imageTexture.needsUpdate = true;
-    // }
-    
-    // image.src = '/minecraft.png';
-    
-const imageTexture = new THREE.TextureLoader().load('/textures/door/color.jpg' );
+const loadingMngr = new THREE.LoadingManager();
+loadingMngr.onStart = (()=> console.log('LOADING onStart'));
+loadingMngr.onLoad = (()=> console.log('LOADING onLoad'));
+loadingMngr.onProgress = (()=> console.log('LOADING onProgress'));
+loadingMngr.onError = (()=> console.log('LOADING onError'));
+// const imageTexture = new THREE.TextureLoader(loadingMngr).load('/textures/door/Door_Wood_001_basecolor.jpg' );
+const imageTexture = new THREE.TextureLoader(loadingMngr).load('/textures/minecraft.png' );
+// imageTexture.rotation = Math.PI / 4;
+imageTexture.center.x = 0.5;
+imageTexture.center.y = 0.5;
+// imageTexture.minFilter = THREE.NearestFilter;
+imageTexture.magFilter = THREE.NearestFilter;
+imageTexture.generateMipmaps = false;
 // imageTexture.colorSpace = THREE.SRGBColorSpace;
 
 
@@ -69,7 +71,6 @@ const sizes = {
 }
 
 //DEBUG CONTROLS
-cubeControlsFolder.add(mesh.position, 'z', -3, 3, 0.0001).name('zoom');
 cubeControlsFolder.add(mesh, 'visible').name('Display mesh')
 cubeControlsFolder.add(material, 'wireframe').name("Wireframe?");
 cubeControlsFolder.addColor(debugObject, 'color').onChange(()=>{
