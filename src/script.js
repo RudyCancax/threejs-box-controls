@@ -18,6 +18,20 @@ const debugObject = {
 };
 
 /**
+ * TEXTUREs
+ */
+const image = new Image();
+const imageTexture = new THREE.Texture(image);
+imageTexture.colorSpace = THREE.SRGBColorSpace;
+image.onload = () => {
+    console.log('image loaded');
+    imageTexture.needsUpdate = true;
+}
+
+image.src = '/minecraft.png';
+
+
+/**
  * Base
  */
 // Canvas
@@ -38,7 +52,8 @@ for (let index = 0; index < count; index++) {
 // geometry.setAttribute('position', positionAtribute);
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: debugObject.color, wireframe: true })
+// const material = new THREE.MeshBasicMaterial({ color: debugObject.color, wireframe: true })
+const material = new THREE.MeshBasicMaterial({ map: imageTexture })
 const mesh = new THREE.Mesh(geometry, material);
 mesh.rotation.x = 0.5;
 scene.add(mesh)
