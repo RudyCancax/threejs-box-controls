@@ -20,15 +20,19 @@ const debugObject = {
 /**
  * TEXTUREs
  */
-const image = new Image();
-const imageTexture = new THREE.Texture(image);
-imageTexture.colorSpace = THREE.SRGBColorSpace;
-image.onload = () => {
-    console.log('image loaded');
-    imageTexture.needsUpdate = true;
-}
+// const image = new Image();
+// const imageTexture = new THREE.Texture(image);
+// imageTexture.colorSpace = THREE.SRGBColorSpace;
+// image.onload = () => {
+    //     console.log('image loaded');
+    //     imageTexture.needsUpdate = true;
+    // }
+    
+    // image.src = '/minecraft.png';
+    
+const imageTexture = new THREE.TextureLoader().load('/textures/door/color.jpg' );
+// imageTexture.colorSpace = THREE.SRGBColorSpace;
 
-image.src = '/minecraft.png';
 
 
 /**
